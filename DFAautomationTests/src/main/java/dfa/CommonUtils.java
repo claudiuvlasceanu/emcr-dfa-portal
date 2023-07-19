@@ -17,8 +17,8 @@ public class CommonUtils {
         WebElement element = WebDriverManager.getElement();
 
         if (Config.ENVIROMENT.equals(Constants.DEV)) {
-            driver.get("");
-            driver.navigate().to("");
+            driver.get("http://localhost:5200/");
+            driver.navigate().to("http://localhost:5200/");
             driver.navigate().refresh();
 
         } else if (Config.ENVIROMENT.equals(Constants.TST)) {
