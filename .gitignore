@@ -9,3 +9,5 @@
 **/openshift/templates/*.json
 # Angular local environment files
 **/environment.local.ts
+DFAautomationTests/.idea/workspace.xml
+DFAautomationTests/bin/chromedriver.exe
