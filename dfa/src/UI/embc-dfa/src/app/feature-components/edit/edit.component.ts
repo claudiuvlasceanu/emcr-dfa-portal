@@ -8,6 +8,8 @@ import { EvacuationFileDataService } from '../../sharedModules/components/evacua
 import { EvacuationFileService } from '../../sharedModules/components/evacuation-file/evacuation-file.service';
 import { ProfileDataService } from '../profile/profile-data.service';
 import { ProfileService } from '../profile/profile.service';
+import { DFAApplicationStartDataService } from '../dfa-application-start/dfa-application-start-data.service';
+import { DFAApplicationStartService } from '../dfa-application-start/dfa-application-start.service';
 import { EditService } from './edit.service';
 import * as globalConst from '../../core/services/globalConstants';
 import { AppSessionService } from 'src/app/core/services/appSession.service';
@@ -20,10 +22,11 @@ import { AppSessionService } from 'src/app/core/services/appSession.service';
 export class EditComponent implements OnInit, OnDestroy {
   componentToLoad: string;
   profileFolderPath: string;
+  dfaApplicationStartFolderPath: string;
   needsAssessmentNavigationExtras: NavigationExtras = {
     state: { stepIndex: 5 }
   };
-  profileNavigationExtras: NavigationExtras = { state: { stepIndex: 4 } };
+  profileNavigationExtras: NavigationExtras = { state: { stepIndex: 3 } };
   form$: Subscription;
   form: UntypedFormGroup;
   editHeading: string;
@@ -40,6 +43,8 @@ export class EditComponent implements OnInit, OnDestroy {
     private formCreationService: FormCreationService,
     private profileService: ProfileService,
     private profileDataService: ProfileDataService,
+    private dfaApplicationStartService: DFAApplicationStartService,
+    private dfaApplicationStartDataService: DFAApplicationStartDataService,
     private evacuationFileDataService: EvacuationFileDataService,
     private alertService: AlertService,
     private editService: EditService,
@@ -129,6 +134,10 @@ export class EditComponent implements OnInit, OnDestroy {
             }
           });
         }
+      } else if (this.appSessionService.editParentPage === 'dfa-application-start') {
+        this.router.navigate(
+          [this.verifiedRoute]
+        );
       }
     }
   }
@@ -215,11 +224,7 @@ export class EditComponent implements OnInit, OnDestroy {
         this.profileFolderPath = 'evacuee-profile-forms';
         break;
       case 'security-questions':
-        this.form$ = this.formCreationService
-          .getSecurityQuestionsForm()
-          .subscribe((questions) => {
-            this.form = questions;
-          });
+
         this.editHeading = 'Edit Profile';
         this.profileFolderPath = 'evacuee-profile-forms';
         break;
@@ -268,7 +273,34 @@ export class EditComponent implements OnInit, OnDestroy {
         this.editHeading = 'Edit Evacuation File';
         this.profileFolderPath = 'needs-assessment-forms';
         break;
-      default:
+      case 'apptype-insurance':
+        this.form$ = this.formCreationService
+          .getAppTypeInsuranceForm()
+          .subscribe((appTypeInsurance) => {
+            this.form = appTypeInsurance;
+          });
+        this.editHeading = 'Application Type & Insurance';
+        this.dfaApplicationStartFolderPath = 'dfa-application-start-forms';
+        break;
+      case 'profile-verification':
+        this.form$ = this.formCreationService
+          .getProfileVerificationForm()
+          .subscribe((profileVerification) => {
+            this.form = profileVerification;
+          });
+        this.editHeading = 'Profile Verification';
+        this.dfaApplicationStartFolderPath = 'dfa-application-start-forms';
+        break;
+      case 'consent':
+        this.form$ = this.formCreationService
+          .getConsentForm()
+          .subscribe((consent) => {
+            this.form = consent;
+          });
+        this.editHeading = 'Consent';
+        this.dfaApplicationStartFolderPath = 'dfa-application-start-forms';
+        break;
+     default:
     }
   }
 

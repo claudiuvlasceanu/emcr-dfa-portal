@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatNativeDateModule} from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker'
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { ApiModule } from './core/api/api.module';
@@ -12,13 +14,16 @@ import { APP_BASE_HREF, PlatformLocation } from '@angular/common';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { OutageBannerComponent } from './sharedModules/outage-components/outage-banner/outage-banner.component';
 import { OutageDialogComponent } from './sharedModules/outage-components/outage-dialog/outage-dialog.component';
+import { DfaApplicationComponent } from './sharedModules/dashboard-components/dfa-application/dfa-application.component';
 
 @NgModule({
-  declarations: [AppComponent, OutageBannerComponent, OutageDialogComponent],
+  declarations: [AppComponent, OutageBannerComponent, OutageDialogComponent, DfaApplicationComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
+    MatDatepickerModule,
     AppRoutingModule,
+    MatNativeDateModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     CoreModule,

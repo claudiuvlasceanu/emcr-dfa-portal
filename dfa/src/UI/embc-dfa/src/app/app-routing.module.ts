@@ -29,6 +29,30 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'dfa-application-start',
+    loadChildren: () =>
+      import(
+        './feature-components/dfa-application-start/dfa-application-start.module'
+      ).then((m) => m.DFAApplicationStartModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'dfa-application-main',
+    loadChildren: () =>
+      import(
+        './feature-components/dfa-application-main/dfa-application-main.module'
+      ).then((m) => m.DFAApplicationMainModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'dfa-dashboard',
+    loadChildren: () =>
+      import(
+        './feature-components/dashboard/dashboard.module'
+      ).then((m) => m.DashboardModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'error',
     loadChildren: () =>
       import('./feature-components/error-screen/error-screen.module').then(

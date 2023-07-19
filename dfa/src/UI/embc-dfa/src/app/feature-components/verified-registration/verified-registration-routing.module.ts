@@ -26,6 +26,14 @@ const routes: Routes = [
         data: { flow: 'verified-registration' }
       },
       {
+        path: 'nextstep-profile',
+        loadChildren: () =>
+          import('../nextstepsprofile/nextstepsprofile.module').then(
+            (m) => m.NextstepsprofileModule
+          ),
+        data: { flow: 'verified-registration' }
+      },
+      {
         path: 'restriction',
         loadChildren: () =>
           import('../restriction/restriction.module').then(
@@ -37,6 +45,12 @@ const routes: Routes = [
         path: 'create-profile',
         loadChildren: () =>
           import('../profile/profile.module').then((m) => m.ProfileModule),
+        data: { flow: 'verified-registration' }
+      },
+      {
+        path: 'dfa-application-start',
+        loadChildren: () =>
+          import('../dfa-application-start/dfa-application-start.module').then((m) => m.DFAApplicationStartModule),
         data: { flow: 'verified-registration' }
       },
       {

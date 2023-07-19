@@ -43,7 +43,7 @@ export default class AddressComponent
 {
   primaryAddressForm: UntypedFormGroup;
   primaryAddressForm$: Subscription;
-  radioOption: string[] = ['Yes', 'No'];
+  radioOption: string[] = ['Yes', 'No', 'I don\'t have a permanent address right now'];
   formBuilder: UntypedFormBuilder;
   formCreationService: FormCreationService;
   filteredOptions: Observable<Country[]>;
@@ -61,7 +61,7 @@ export default class AddressComponent
   }
 
   ngOnInit(): void {
-    this.countries = this.locationService.getActiveCountriesList();
+    //this.countries = this.locationService.getActiveCountriesList();
 
     this.primaryAddressForm$ = this.formCreationService
       .getAddressForm()
@@ -69,48 +69,46 @@ export default class AddressComponent
         this.primaryAddressForm = primaryAddress;
       });
 
-    this.filteredOptions = this.primaryAddressForm
-      .get('address.country')
-      .valueChanges.pipe(
-        startWith(''),
-        map((value) => (value ? this.filter(value) : this.countries.slice()))
-      );
+    //this.filteredOptions = this.primaryAddressForm
+    //  .get('address.country')
+    //  .valueChanges.pipe(
+    //    startWith(''),
+    //    map((value) => (value ? this.filter(value) : this.countries.slice()))
+    //  );
 
-    this.mailingFilteredOptions = this.primaryAddressForm
-      .get('mailingAddress.country')
-      .valueChanges.pipe(
-        startWith(''),
-        map((value) => (value ? this.filter(value) : this.countries.slice()))
-      );
+    //this.mailingFilteredOptions = this.primaryAddressForm
+    //  .get('mailingAddress.country')
+    //  .valueChanges.pipe(
+    //    startWith(''),
+    //    map((value) => (value ? this.filter(value) : this.countries.slice()))
+    //  );
 
-    this.primaryAddressForm
-      .get('address.country')
-      .valueChanges.subscribe((value) => {
-        this.primaryAddressForm
-          .get('address.stateProvince')
-          .updateValueAndValidity();
-      });
+    //this.primaryAddressForm
+    //  .get('address.country')
+    //  .valueChanges.subscribe((value) => {
+    //    this.primaryAddressForm
+    //      .get('address.stateProvince')
+    //      .updateValueAndValidity();
+    //  });
 
-    this.primaryAddressForm
-      .get('mailingAddress.country')
-      .valueChanges.subscribe((value) => {
-        this.primaryAddressForm
-          .get('mailingAddress.stateProvince')
-          .updateValueAndValidity();
-      });
+    //this.primaryAddressForm
+    //  .get('mailingAddress.country')
+    //  .valueChanges.subscribe((value) => {
+    //    this.primaryAddressForm
+    //      .get('mailingAddress.stateProvince')
+    //      .updateValueAndValidity();
+    //  });
 
-    this.primaryAddressForm
-      .get('isBcAddress')
-      .valueChanges.subscribe((value) => {
-        this.updateOnVisibility();
-      });
+    //this.primaryAddressForm
+    //  .get('isBcAddress')
+    //  .valueChanges.subscribe((value) => {
+    //    this.updateOnVisibility();
+    //  });
 
     this.primaryAddressForm
       .get('isNewMailingAddress')
       .valueChanges.subscribe((value) => {
-        this.primaryAddressForm
-          .get('isBcMailingAddress')
-          .updateValueAndValidity();
+        this.updateOnVisibilityMailingAddress();
       });
 
     this.primaryAddressForm.get('address').valueChanges.subscribe((value) => {
@@ -165,7 +163,7 @@ export default class AddressComponent
     if (event.value === 'Yes') {
       this.primaryAddressForm
         .get('address.stateProvince')
-        .setValue(globalConst.defaultProvince);
+        .setValue(globalConst.defaultProvince.name);
       this.primaryAddressForm
         .get('address.country')
         .setValue(globalConst.defaultCountry);
@@ -196,7 +194,20 @@ export default class AddressComponent
     this.primaryAddressForm.get('address.postalCode').updateValueAndValidity();
   }
 
+  updateOnVisibilityMailingAddress(): void {
+    this.primaryAddressForm
+      .get('mailingAddress.addressLine1')
+      .updateValueAndValidity();
+    this.primaryAddressForm.get('mailingAddress.community').updateValueAndValidity();
+    this.primaryAddressForm
+      .get('mailingAddress.stateProvince')
+      .updateValueAndValidity();
+    //this.primaryAddressForm.get('mailingAddress.country').updateValueAndValidity();
+    this.primaryAddressForm.get('mailingAddress.postalCode').updateValueAndValidity();
+  }
+
   sameAsPrimary(event: MatRadioChange): void {
+    //this.updateOnVisibilityMailingAddress();
     if (event.value === 'Yes') {
       const primaryAddress = this.primaryAddressForm.getRawValue().address;
       this.primaryAddressForm.get('mailingAddress').setValue(primaryAddress);

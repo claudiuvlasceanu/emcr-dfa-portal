@@ -21,6 +21,7 @@ import {
 })
 export class BcAddressComponent implements OnInit, AfterViewChecked {
   @Input() addressForm: UntypedFormGroup;
+  @Input() primaryAddressWarning: boolean;
   filteredOptions: Observable<Community[]>;
   city: Community[] = [];
   province = [globalConst.defaultProvince];
@@ -31,7 +32,7 @@ export class BcAddressComponent implements OnInit, AfterViewChecked {
   ) {}
 
   ngOnInit(): void {
-    this.city = this.locationService.getActiveCommunityList();
+    //this.city = this.locationService.getActiveCommunityList();
 
     this.filteredOptions = this.addressForm.get('community').valueChanges.pipe(
       startWith(''),

@@ -8,12 +8,12 @@ export class ComponentCreationService {
     { type: 'personal-details' },
     { type: 'address' },
     { type: 'contact-info' },
-    { type: 'secret' }
+    { type: 'review' }
   ];
   profileComponents: Array<any> = [
     {
       component: 'personal-details',
-      nextButtonLabel: 'Next - Primary & Mailing Address',
+      nextButtonLabel: 'Next - Address',
       backButtonLabel: 'Go Back & Edit',
       isLast: false,
       loadWrapperButton: false,
@@ -31,22 +31,111 @@ export class ComponentCreationService {
     },
     {
       component: 'contact-info',
-      nextButtonLabel: 'Next - Security Question',
+      nextButtonLabel: 'Next - Review & Submit',
       backButtonLabel: 'Go Back & Edit',
       isLast: false,
       loadWrapperButton: false,
       lastStep: 0,
       stepName: 'Contact'
+    }
+    //,
+    //{
+    //  component: 'security-questions',
+    //  nextButtonLabel: 'Next - Create Evacuation File',
+    //  backButtonLabel: 'Go Back & Edit',
+    //  isLast: true,
+    //  loadWrapperButton: false,
+    //  lastStep: 0,
+    //  stepName: 'Security Questions'
+    //}
+  ];
+
+  dfaApplicationStartComponents: Array<any> = [
+    {
+      component: 'consent',
+      nextButtonLabel: 'Next - Profile Verification',
+      backButtonLabel: 'Cancel',
+      isLast: false,
+      loadWrapperButton: false,
+      lastStep: -2,
+      stepName: 'Consent'
     },
     {
-      component: 'security-questions',
-      nextButtonLabel: 'Next - Create Evacuation File',
-      backButtonLabel: 'Go Back & Edit',
+      component: 'profile-verification',
+      nextButtonLabel: 'Next - Application Type',
+      backButtonLabel: 'Cancel',
+      isLast: false,
+      loadWrapperButton: false,
+      lastStep: 0,
+      stepName: 'Profile Verification'
+    },
+    {
+      component: 'apptype-insurance',
+      nextButtonLabel: 'Next - Damaged Property',
+      backButtonLabel: 'Cancel',
       isLast: true,
       loadWrapperButton: false,
       lastStep: 0,
-      stepName: 'Security Questions'
+      stepName: 'Application Type & Insurance'
     }
+  ];
+
+  dfaApplicationMainComponents: Array<any> = [
+    {
+      component: 'damaged-property-address',
+      nextButtonLabel: 'Next - Cause of Damage',
+      backButtonLabel: 'Go Back & Edit',
+      isLast: false,
+      loadWrapperButton: false,
+      lastStep: -2,
+      stepName: 'Damaged Property'
+    },
+    {
+      component: 'property-damage',
+      nextButtonLabel: 'Next - Occupants',
+      backButtonLabel: 'Go Back & Edit',
+      isLast: false,
+      loadWrapperButton: false,
+      lastStep: 0,
+      stepName: 'Damage'
+    },
+    {
+      component: 'occupants',
+      nextButtonLabel: 'Next - Clean Up Log',
+      backButtonLabel: 'Go Back & Edit',
+      isLast: false,
+      loadWrapperButton: false,
+      lastStep: 0,
+      stepName: 'Occupants'
+    },
+    {
+      component: 'clean-up-log',
+      nextButtonLabel: 'Next - Damaged Items By Room',
+      backButtonLabel: 'Go Back & Edit',
+      isLast: false,
+      loadWrapperButton: false,
+      lastStep: 0,
+      stepName: 'Clean Up Log'
+    },
+    {
+      component: 'damaged-items-by-room',
+      nextButtonLabel: 'Next - Supporting Documents',
+      backButtonLabel: 'Go Back & Edit',
+      isLast: false,
+      loadWrapperButton: false,
+      lastStep: 0,
+      stepName: 'Damaged Items By Room'
+    },
+    {
+      component: 'supporting-documents',
+      nextButtonLabel: 'Next - Review',
+      backButtonLabel: 'Go Back & Edit',
+      isLast: false,
+      loadWrapperButton: false,
+      lastStep: 0,
+      stepName: 'Supporting Documents'
+    }
+
   ];
 
   needsAssessmentComponents: Array<any> = [
@@ -109,6 +198,24 @@ export class ComponentCreationService {
     const componentArr: Array<ComponentMetaDataModel> =
       new Array<ComponentMetaDataModel>();
     for (const comp of this.profileComponents) {
+      componentArr.push(Object.assign(new ComponentMetaDataModel(), comp));
+    }
+    return componentArr;
+  }
+
+  createDFAApplicationStartSteps(): Array<ComponentMetaDataModel> {
+    const componentArr: Array<ComponentMetaDataModel> =
+      new Array<ComponentMetaDataModel>();
+    for (const comp of this.dfaApplicationStartComponents) {
+      componentArr.push(Object.assign(new ComponentMetaDataModel(), comp));
+    }
+    return componentArr;
+  }
+
+  createDFAApplicationMainSteps(): Array<ComponentMetaDataModel> {
+    const componentArr: Array<ComponentMetaDataModel> =
+      new Array<ComponentMetaDataModel>();
+    for (const comp of this.dfaApplicationMainComponents) {
       componentArr.push(Object.assign(new ComponentMetaDataModel(), comp));
     }
     return componentArr;
