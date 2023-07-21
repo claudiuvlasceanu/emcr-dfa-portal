@@ -19,15 +19,15 @@ public class CreateProfile {
     private WebDriver driver;
 
 
-//    @After
-//    public void tearDown() {
-//        driver.close();
-//        driver.quit();
-//    }
-//    @AfterClass
-//    public static void afterClass() {
-//        WebDriverManager.instance = null;
-//    }
+    @After
+    public void tearDown() {
+        driver.close();
+        driver.quit();
+    }
+    @AfterClass
+    public static void afterClass() {
+        WebDriverManager.instance = null;
+    }
 
 
     @Test
@@ -98,6 +98,12 @@ public class CreateProfile {
                 ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(), ' Next - Review & Submit ')]"))).click();
         new WebDriverWait(driver, Duration.ofSeconds(60)).until(
                 ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(), 'Review & Submit')]")));
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+        Thread.sleep(1000);
+        new WebDriverWait(driver, Duration.ofSeconds(60)).until(
+                ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(), ' Save & Submit ')]"))).click();
+        new WebDriverWait(driver, Duration.ofSeconds(60)).until(
+                ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(), ' No, I am not ready to apply ')]")));
 
         }
 
