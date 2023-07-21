@@ -89,14 +89,6 @@ public class CreateProfile {
         element = driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/app-root/div/main/div/app-verified-registration/app-profile/div/mat-horizontal-stepper/div/div[2]/div[3]/app-component-wrapper/app-contact-info/mat-card/mat-card-content/form/div[2]/div/mat-form-field[1]/div/div[1]/div[3]/input")));
         js5.executeScript("arguments[0].scrollIntoView(true);", element);
         element.sendKeys("999-999-9999");
-       /* Thread.sleep(1500);
-        JavascriptExecutor js6 = (JavascriptExecutor) driver;
-        element = driverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/app-root/div/main/div/app-verified-registration/app-profile/div/mat-horizontal-stepper/div/div[2]/div[3]/app-component-wrapper/app-contact-info/mat-card/mat-card-content/form/div[2]/div/mat-form-field[2]/div/div[1]/div[3]")));
-        js6.executeScript("arguments[0].scrollIntoView(true);", element);
-        element.sendKeys("1111111111");
-
-        element = driverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/app-root/div/main/div/app-verified-registration/app-profile/div/mat-horizontal-stepper/div/div[2]/div[3]/app-component-wrapper/app-contact-info/mat-card/mat-card-content/form/div[2]/div/mat-form-field[3]/div/div[1]/div[3]")));
-        element.sendKeys("0000000000");*/
 
         js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
         Thread.sleep(1000);
