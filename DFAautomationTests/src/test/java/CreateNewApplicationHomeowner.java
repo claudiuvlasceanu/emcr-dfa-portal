@@ -4,6 +4,7 @@ import org.junit.AfterClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
@@ -11,6 +12,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
 import java.time.Duration;
 import static dfa.WebDriverManager.getDriver;
 
@@ -69,12 +71,34 @@ public class CreateNewApplicationHomeowner {
         new WebDriverWait(driver, Duration.ofSeconds(60)).until(
                 ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(), 'I/We declare that we carry no insurance (no fire, theft or liability) on the property listed on this')]")));
 
+        Thread.sleep(1000);
+    /*    Actions action = new Actions(driver);
+        WebElement ele = driverWait
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("canvas")));
 
-        Actions action = new Actions(driver);
-        WebElement ele = driver.findElement(By.id("canvas"));
+        //Used points class to get x and y coordinates of element.
+        Point point = ele.getLocation();
+        int xcord = point.getX();
+        System.out.println("Position of the webelement from left side is "+xcord +" pixels");
+        int ycord = point.getY();
+        System.out.println("Position of the webelement from top side is "+ycord +" pixels");
+
         js.executeScript("arguments[0].scrollIntoView();", ele);
         Thread.sleep(1000);
-        action.moveToElement(ele).clickAndHold().moveByOffset(217, 984).build().perform();
+        action.moveToElement(ele).clickAndHold().moveByOffset(xcord, ycord).build().perform();*/
+
+        element = driverWait.until(ExpectedConditions
+                .presenceOfElementLocated(By.id("mat-input-12")));
+        element.sendKeys("Test Test");
+        element = driverWait.until(ExpectedConditions
+                .presenceOfElementLocated(By.id("mat-input-13")));
+        element.sendKeys("12/12/2024");
+
+        Thread.sleep(1000);
+        JavascriptExecutor js3 = (JavascriptExecutor) driver;
+        element = driverWait
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(), ' Next - Damaged Property ')]")));
+        js3.executeScript("arguments[0].click();", element);
 
 
         }

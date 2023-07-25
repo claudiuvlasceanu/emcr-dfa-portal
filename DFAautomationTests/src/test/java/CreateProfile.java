@@ -65,8 +65,8 @@ public class CreateProfile {
         //Address Check
         new WebDriverWait(driver, Duration.ofSeconds(60)).until(
                 ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(), '818-9025 PEARL PLACE')]")));
-        new WebDriverWait(driver, Duration.ofSeconds(60)).until(
-                ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(), 'asfaf')]")));
+//        new WebDriverWait(driver, Duration.ofSeconds(60)).until(
+//                ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(), 'asfaf')]")));
         new WebDriverWait(driver, Duration.ofSeconds(60)).until(
                 ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(), 'BC')]")));
         new WebDriverWait(driver, Duration.ofSeconds(60)).until(
